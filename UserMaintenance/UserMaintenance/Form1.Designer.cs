@@ -85,6 +85,7 @@ namespace UserMaintenance
             this.buttonAdd.TabIndex = 5;
             this.buttonAdd.Text = "button1";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // Form1
             // 
