@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace ValueAtRisk
         List<Tick> Ticks;
         PortfolioEntities context = new PortfolioEntities();
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek = new List<decimal>();
 
         public Form1()
         {
@@ -23,7 +25,6 @@ namespace ValueAtRisk
             dgw1.DataSource = Ticks;
             CreatePortfolio();
 
-            List<decimal> Nyereségek = new List<decimal>();
             int intervallum = 30;
             DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -65,6 +66,36 @@ namespace ValueAtRisk
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            {
+                sw.Write("Időszak");
+                sw.Write(';');
+                sw.Write("Nyereség");
+                sw.Write(';');
+                sw.WriteLine();
+
+                int counter = 1;
+
+                foreach (var n in Nyereségek)
+                {
+                    sw.Write(counter);
+                    sw.Write(';');
+                    sw.Write(n.ToString());
+                    sw.Write(';');
+                    sw.WriteLine();
+                    counter++;
+                }
+            }
+
+
         }
     }
 }

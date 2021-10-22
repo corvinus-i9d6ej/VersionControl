@@ -31,6 +31,7 @@ namespace ValueAtRisk
         {
             this.dgw1 = new System.Windows.Forms.DataGridView();
             this.dgw2 = new System.Windows.Forms.DataGridView();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgw1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgw2)).BeginInit();
             this.SuspendLayout();
@@ -53,14 +54,25 @@ namespace ValueAtRisk
             this.dgw2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgw2.Location = new System.Drawing.Point(559, 12);
             this.dgw2.Name = "dgw2";
-            this.dgw2.Size = new System.Drawing.Size(229, 426);
+            this.dgw2.Size = new System.Drawing.Size(229, 378);
             this.dgw2.TabIndex = 1;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(559, 396);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(228, 41);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dgw2);
             this.Controls.Add(this.dgw1);
             this.Name = "Form1";
@@ -75,6 +87,7 @@ namespace ValueAtRisk
 
         private System.Windows.Forms.DataGridView dgw1;
         private System.Windows.Forms.DataGridView dgw2;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
