@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Webszolgaltatas_I9D6EJ.MnbServiceReference;
+using Webszolgaltatas_I9D6EJ.Entities;
 
 namespace Webszolgaltatas_I9D6EJ
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
+
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +30,8 @@ namespace Webszolgaltatas_I9D6EJ
 
             var response = mnbService.GetExchangeRates(request);
             string result = response.GetExchangeRatesResult;
+
+            dataGridView1.DataSource = Rates;
         }
     }
 }
