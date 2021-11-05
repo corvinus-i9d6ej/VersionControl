@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Week7_I9D6EJ.Entities;
 
 namespace Week7_I9D6EJ
 {
