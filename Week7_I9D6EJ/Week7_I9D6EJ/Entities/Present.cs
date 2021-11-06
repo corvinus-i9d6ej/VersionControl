@@ -8,13 +8,11 @@ using Week7_I9D6EJ.Abstractions;
 
 namespace Week7_I9D6EJ.Entities
 {
-    public class BallFactory: IToyFactory
+    public class Present : Toy
     {
-        public Color BallColor { get; set; }
-
-        public Toy CreateNew()
+        protected override void DrawImage(Graphics g)
         {
-            return new Ball(BallColor);
+            
         }
     }
 }

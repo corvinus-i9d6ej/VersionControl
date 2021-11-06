@@ -30,6 +30,7 @@ namespace Week7_I9D6EJ
         public Form1()
         {
             InitializeComponent();
+            Factory = new BallFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -43,17 +44,18 @@ namespace Week7_I9D6EJ
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var position = 0;
-            foreach (var b in _toys)
+            foreach (var t in _toys)
             {
-                b.MoveToy();
-                if (b.Left > position)
-                    position = b.Left;
-                if (position == 1000)
-                {
-                    var oldestToy = _toys[0];
-                    mainPanel.Controls.Remove(oldestToy);
-                    _toys.Remove(oldestToy);
-                }
+                t.MoveToy();
+                if (t.Left > position)
+                    position = t.Left;
+            }
+
+            if (position > 1000)
+            {
+                var oldestToy = _toys[0];
+                mainPanel.Controls.Remove(oldestToy);
+                _toys.Remove(oldestToy);
             }
         }
 
@@ -64,13 +66,16 @@ namespace Week7_I9D6EJ
 
         private void btnBall_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory()
+            {
+                BallColor = btnColor.BackColor
+            };
         }
         private void DisplayNext()
         {
             if (_nextToy != null) Controls.Remove(_nextToy);
             _nextToy = Factory.CreateNew();
-            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Top = (label1.Top + label1.Height + 20);
             _nextToy.Left = label1.Left;
             Controls.Add(_nextToy);
         }
