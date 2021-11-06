@@ -7,11 +7,11 @@ using Week7_I9D6EJ.Abstractions;
 
 namespace Week7_I9D6EJ.Entities
 {
-    public class BallFactory: IToyFactory
+    public class CarFactory : IToyFactory
     {
         public Toy CreateNew()
         {
-            return new Ball();
+            return new Car();
         }
     }
 }
