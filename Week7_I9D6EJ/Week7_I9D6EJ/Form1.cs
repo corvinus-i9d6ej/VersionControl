@@ -27,19 +27,9 @@ namespace Week7_I9D6EJ
             }
         }
 
-        public void DisplayNext()
-        {
-            if (_nextToy != null) Controls.Remove(_nextToy);
-            _nextToy = Factory.CreateNew();
-            _nextToy.Top = label1.Top + label1.Height + 20;
-            _nextToy.Left = label1.Left;
-            Controls.Add(_nextToy);
-        }
-
         public Form1()
         {
             InitializeComponent();
-            Factory = new CarFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -75,6 +65,25 @@ namespace Week7_I9D6EJ
         private void btnBall_Click(object sender, EventArgs e)
         {
             Factory = new BallFactory();
+        }
+        private void DisplayNext()
+        {
+            if (_nextToy != null) Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Left = label1.Left;
+            Controls.Add(_nextToy);
+        }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            btnColor.BackColor = Color.Fuchsia;
+            Button button = (Button)sender;
+            ColorDialog cd = new ColorDialog();
+            cd.Color = btnColor.BackColor;
+
+            if (cd.ShowDialog() != DialogResult.OK) return;
+            button.BackColor = cd.Color;
         }
     }
 }

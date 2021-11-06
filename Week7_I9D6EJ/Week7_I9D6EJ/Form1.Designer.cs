@@ -36,6 +36,7 @@ namespace Week7_I9D6EJ
             this.btnCar = new System.Windows.Forms.Button();
             this.btnBall = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnColor = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +45,7 @@ namespace Week7_I9D6EJ
             this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainPanel.Controls.Add(this.btnColor);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.btnBall);
             this.mainPanel.Controls.Add(this.btnCar);
@@ -87,11 +89,20 @@ namespace Week7_I9D6EJ
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(197, 27);
+            this.label1.Location = new System.Drawing.Point(291, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
+            // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(197, 10);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(88, 46);
+            this.btnColor.TabIndex = 3;
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // Form1
             // 
@@ -115,6 +126,7 @@ namespace Week7_I9D6EJ
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBall;
         private System.Windows.Forms.Button btnCar;
+        private System.Windows.Forms.Button btnColor;
     }
 }
 
