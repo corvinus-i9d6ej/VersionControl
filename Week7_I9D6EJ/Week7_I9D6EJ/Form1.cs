@@ -42,7 +42,7 @@ namespace Week7_I9D6EJ
             var position = 0;
             foreach (var b in _balls)
             {
-                b.MoveBall();
+                b.MoveToy();
                 if (b.Left > position)
                     position = b.Left;
                 if (position == 1000)

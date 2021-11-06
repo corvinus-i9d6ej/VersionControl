@@ -25,7 +25,7 @@ namespace Week7_I9D6EJ.Abstractions
 
         protected abstract void DrawImage(Graphics g);
 
-        public void MoveToy()
+        public virtual void MoveToy()
         {
             Left += 1;
         }
