@@ -31,13 +31,12 @@ namespace Week7_I9D6EJ
         {
             this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBall = new System.Windows.Forms.Button();
+            this.btnCar = new System.Windows.Forms.Button();
             this.createTimer = new System.Windows.Forms.Timer(this.components);
             this.conveyorTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnCar = new System.Windows.Forms.Button();
-            this.btnBall = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnColor = new System.Windows.Forms.Button();
-            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -45,14 +44,48 @@ namespace Week7_I9D6EJ
             this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainPanel.Controls.Add(this.btnColor);
-            this.mainPanel.Controls.Add(this.label1);
-            this.mainPanel.Controls.Add(this.btnBall);
-            this.mainPanel.Controls.Add(this.btnCar);
-            this.mainPanel.Location = new System.Drawing.Point(3, 2);
+            this.mainPanel.Location = new System.Drawing.Point(3, 140);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(796, 447);
+            this.mainPanel.Size = new System.Drawing.Size(796, 309);
             this.mainPanel.TabIndex = 0;
+            // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(193, 12);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(88, 46);
+            this.btnColor.TabIndex = 3;
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(287, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
+            // 
+            // btnBall
+            // 
+            this.btnBall.Location = new System.Drawing.Point(99, 12);
+            this.btnBall.Name = "btnBall";
+            this.btnBall.Size = new System.Drawing.Size(88, 46);
+            this.btnBall.TabIndex = 1;
+            this.btnBall.Text = "BALL";
+            this.btnBall.UseVisualStyleBackColor = true;
+            this.btnBall.Click += new System.EventHandler(this.btnBall_Click);
+            // 
+            // btnCar
+            // 
+            this.btnCar.Location = new System.Drawing.Point(5, 12);
+            this.btnCar.Name = "btnCar";
+            this.btnCar.Size = new System.Drawing.Size(88, 46);
+            this.btnCar.TabIndex = 0;
+            this.btnCar.Text = "CAR";
+            this.btnCar.UseVisualStyleBackColor = true;
+            this.btnCar.Click += new System.EventHandler(this.btnCar_Click);
             // 
             // createTimer
             // 
@@ -66,55 +99,20 @@ namespace Week7_I9D6EJ
             this.conveyorTimer.Interval = 10;
             this.conveyorTimer.Tick += new System.EventHandler(this.conveyorTimer_Tick);
             // 
-            // btnCar
-            // 
-            this.btnCar.Location = new System.Drawing.Point(9, 10);
-            this.btnCar.Name = "btnCar";
-            this.btnCar.Size = new System.Drawing.Size(88, 46);
-            this.btnCar.TabIndex = 0;
-            this.btnCar.Text = "CAR";
-            this.btnCar.UseVisualStyleBackColor = true;
-            this.btnCar.Click += new System.EventHandler(this.btnCar_Click);
-            // 
-            // btnBall
-            // 
-            this.btnBall.Location = new System.Drawing.Point(103, 10);
-            this.btnBall.Name = "btnBall";
-            this.btnBall.Size = new System.Drawing.Size(88, 46);
-            this.btnBall.TabIndex = 1;
-            this.btnBall.Text = "BALL";
-            this.btnBall.UseVisualStyleBackColor = true;
-            this.btnBall.Click += new System.EventHandler(this.btnBall_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(291, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
-            // 
-            // btnColor
-            // 
-            this.btnColor.Location = new System.Drawing.Point(197, 10);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(88, 46);
-            this.btnColor.TabIndex = 3;
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnColor);
             this.Controls.Add(this.mainPanel);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnBall);
+            this.Controls.Add(this.btnCar);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
