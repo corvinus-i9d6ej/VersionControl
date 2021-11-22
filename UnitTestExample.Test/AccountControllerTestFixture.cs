@@ -39,5 +39,40 @@ namespace UnitTestExample.Test
             var result = ac.ValidatePassword(password);
             Assert.AreEqual(result, expectedResult);
         }
+
+        [
+            Test,
+            TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+            TestCase("irf@uni-corvinus.hu", "Abcdef12"),
+            TestCase("irf@uni-corvinus.hu", "Abcdefgh1234")
+        ]
+        public void TestRegisterHappyPath(string email, string password)
+        {
+            AccountController ac = new AccountController();
+            var result = ac.Register(email, password);
+            Assert.AreEqual(email, result.Email);
+            Assert.AreEqual(password, result.Password);
+            Assert.AreNotEqual(Guid.Empty, result.ID);
+        }
+
+        [
+            Test,
+            TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+            TestCase("irf@uni-corvinus.hu", "Ab1234"),
+            TestCase("irf.uni-corvinus.hu", "Abcd1234"),
+        ]
+        public void TestRegisterValidateException(string email, string password)
+        {
+            AccountController ac = new AccountController();
+            try
+            {
+                var result = ac.Register(email, password);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOf<ValidationException>(ex);
+            }
+        }
     }
 }
