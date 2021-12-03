@@ -18,6 +18,7 @@ namespace Mikroszimulacio
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
+        Random rng = new Random(1234);
         public Form1()
         {
             InitializeComponent();
@@ -25,9 +26,50 @@ namespace Mikroszimulacio
             People = GetPeople(@"C:\temp\nép.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\temp\halál.csv");
+
+            for (int year = 2005; year < 2025; year++)
+            {
+                for (int i = 0; i < People.Count; i++)
+                {
+                    SimStep(year, People[i]);
+                }
+
+                int numberOfMales = (from x in People
+                                     where x.Gender == Gender.Male && x.IsAlive == true
+                                     select x).Count();
+                int numberOfFemales = (from x in People
+                                       where x.Gender == Gender.Female && x.IsAlive == true
+                                       select x).Count();
+                Console.WriteLine(string.Format("Év: {0} Férfiak: {1} Nők: {2}", year, numberOfMales, numberOfFemales));
+            }
         }
 
-        private List<Person> GetPeople(string file)
+        private void SimStep(int year, Person person)
+        {
+            if (person.IsAlive == false) return;
+            byte age = (byte)(year - person.BirthYear);
+            double deathProb = (from x in DeathProbabilities
+                                where x.Gender == person.Gender && x.Age == age
+                                select x.Probability).FirstOrDefault();
+            if (rng.NextDouble() <= deathProb)
+                person.IsAlive = false;
+            if(person.IsAlive == true && person.Gender == Gender.Female)
+            {
+                double birthProb = (from x in BirthProbabilities
+                                    where x.Age == age
+                                    select x.Probability).FirstOrDefault();
+                if (rng.NextDouble() <= birthProb)
+                {
+                    Person newBorn = new Person();
+                    newBorn.BirthYear = year;
+                    newBorn.NumberOfChildren = 0;
+                    newBorn.Gender = (Gender)(rng.Next(1, 3));
+                    People.Add(newBorn);
+                }
+            }
+        }
+
+        public List<Person> GetPeople(string file)
         {
             List<Person> p = new List<Person>();
 
@@ -48,7 +90,7 @@ namespace Mikroszimulacio
             return p;
         }
 
-        private List<BirthProbability> GetBirthProbabilities(string file)
+        public List<BirthProbability> GetBirthProbabilities(string file)
         {
             List<BirthProbability> bp = new List<BirthProbability>();
 
@@ -69,7 +111,7 @@ namespace Mikroszimulacio
             return bp;
         }
 
-        private List<DeathProbability> GetDeathProbabilities(string file)
+        public List<DeathProbability> GetDeathProbabilities(string file)
         {
             List<DeathProbability> dp = new List<DeathProbability>();
 
