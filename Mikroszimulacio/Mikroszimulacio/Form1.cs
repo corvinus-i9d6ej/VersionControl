@@ -17,17 +17,34 @@ namespace Mikroszimulacio
         List<Person> People = new List<Person>();
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+        List<int> NumberOfMales = new List<int>();
+        List<int> NumberOfFemales = new List<int>();
 
         Random rng = new Random(1234);
+
         public Form1()
         {
             InitializeComponent();
+        }
 
-            People = GetPeople(@"C:\temp\nép.csv");
+        private void DisplayResults()
+        {
+            int counter = 0;
+            for (int year = 2005; year < numericUpDown1.Value; year++)
+            {
+                richTextBox1.Text += 
+                    string.Format("Szimulációs év: {0}\n\tFérfiak: {1}\n\tNők: {2}\n\n", year, NumberOfMales[counter], NumberOfFemales[counter]);
+                counter++;
+            }
+        }
+
+        private void Simulation()
+        {
+            People = GetPeople(textBoxPath.Text);
             BirthProbabilities = GetBirthProbabilities(@"C:\temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\temp\halál.csv");
 
-            for (int year = 2005; year < 2025; year++)
+            for (int year = 2005; year <= numericUpDown1.Value; year++)
             {
                 for (int i = 0; i < People.Count; i++)
                 {
@@ -35,25 +52,29 @@ namespace Mikroszimulacio
                 }
 
                 int numberOfMales = (from x in People
-                                     where x.Gender == Gender.Male && x.IsAlive == true
+                                     where x.Gender == Gender.Male && x.IsAlive
                                      select x).Count();
+                NumberOfMales.Add(numberOfMales);
+
                 int numberOfFemales = (from x in People
-                                       where x.Gender == Gender.Female && x.IsAlive == true
+                                       where x.Gender == Gender.Female && x.IsAlive
                                        select x).Count();
-                Console.WriteLine(string.Format("Év: {0} Férfiak: {1} Nők: {2}", year, numberOfMales, numberOfFemales));
+                NumberOfFemales.Add(numberOfFemales);
+
+                //Console.WriteLine(string.Format("Év: {0} Férfiak: {1} Nők: {2}", year, numberOfMales, numberOfFemales));
             }
         }
 
         private void SimStep(int year, Person person)
         {
-            if (person.IsAlive == false) return;
+            if (!person.IsAlive) return;
             byte age = (byte)(year - person.BirthYear);
             double deathProb = (from x in DeathProbabilities
                                 where x.Gender == person.Gender && x.Age == age
                                 select x.Probability).FirstOrDefault();
             if (rng.NextDouble() <= deathProb)
                 person.IsAlive = false;
-            if(person.IsAlive == true && person.Gender == Gender.Female)
+            if(person.IsAlive && person.Gender == Gender.Female)
             {
                 double birthProb = (from x in BirthProbabilities
                                     where x.Age == age
@@ -130,6 +151,24 @@ namespace Mikroszimulacio
             }
 
             return dp;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            NumberOfMales.Clear();
+            NumberOfFemales.Clear();
+            Simulation();
+            DisplayResults();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+            else
+                textBoxPath.Text = ofd.FileName;
         }
     }
 }
